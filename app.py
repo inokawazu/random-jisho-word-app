@@ -8,8 +8,6 @@ import words as wds
 class Application(tk.Frame):
     def __init__(self, master = None):
         super().__init__(master)
-        # self.master = master
-        self.master.geometry("600x800")
         self.master.title("Random Jisho Search Up")
         self.createWidgets()
 
