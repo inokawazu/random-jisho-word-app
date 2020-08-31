@@ -12,27 +12,27 @@ class Application(tk.Frame):
         self.createWidgets()
 
     def createWidgets(self):
-        self.grid(column=2)
+        # self.grid(column=2,row=10)
+        self.grid()
 
-        self.search_text_box = tk.Label(self, text = '''Search Box''',anchor="center")
-        self.search_text_box.grid(column=0,sticky="NSEW")
+        self.search_text_box = tk.Label(self, text = '''Search Box''', anchor="s")
+        self.search_text_box.grid(column=0,columnspan=1)
 
         self.search_input = tk.Entry(self)
-        self.search_input.grid(column=0,sticky="NSEW")
+        self.search_input.grid(column=0,columnspan=1, sticky="n")
         self.search_input.bind('<Return>',func=self.search_word)
 
         self.rdm_wrd_btn = tk.Button(self,text="Random Word",fg="blue",
                               command=self.find_random_word)
-        self.rdm_wrd_btn.grid(column=0,sticky="NSEW")
+        self.rdm_wrd_btn.grid(column=0,columnspan=1)
 
         self.text_box = tk.Label(self, text = '''Please enter a word to \n look up of from JISHO!\nor press the Random Word key!''',anchor="center")
-        self.text_box.grid(column=1, rowspan = 2,sticky="NSEW")
+        self.text_box.grid(column=1,row = 0,rowspan = 2,sticky="NSEW")
 
     def search_word(self,event):
         search_response = jisho_API.search_JISHO(self.search_input.get())
-        # print(search_response['meta'])
         print_statement_list = jisho_API.display_definitions(4,search_response)
-        print_statement = '\n'+'\n\n\n'.join(print_statement_list)
+        print_statement = '\n\n\n'.join(print_statement_list)
         self.text_box["text"] = print_statement
 
     def find_random_word(self):
